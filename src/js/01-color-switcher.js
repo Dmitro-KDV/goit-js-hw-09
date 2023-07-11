@@ -10,11 +10,11 @@ const colorBody= document.querySelector('body');
 let timerId = null;
 
 startBtn.addEventListener("click", () => {
+  startBtn.setAttribute("disabled", ""); 
+  stopBtn.removeAttribute("disabled");
   timerId = setInterval(() => {
     const backColor = getRandomHexColor();
     colorBody.style.backgroundColor = backColor;
-    startBtn.setAttribute("disabled", ""); 
-    stopBtn.removeAttribute("disabled");
   }, 1000);
 });
 

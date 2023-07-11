@@ -52,15 +52,19 @@ startBtn.addEventListener("click", () => {
     let dataInter = dataInput-date;
     let convertMsOb = convertMs(dataInter);
     let timerId = null;
+    startBtn.setAttribute("disabled", ""); 
+    timer.setAttribute("disabled", ""); 
     timerId = setInterval(() => {
-      dataInter -= 1000;
+      if (dataInter <= 0) {
+        clearInterval(timerId);
+        timer.removeAttribute("disabled"); 
+        return;
+      }
       convertMsOb = convertMs(dataInter);
       valueDays.textContent = String(Object.values(convertMsOb)[0]).padStart(2,'0');
       valueHours.textContent = String(Object.values(convertMsOb)[1]).padStart(2,'0');
       valueMinutess.textContent = String(Object.values(convertMsOb)[2]).padStart(2,'0');
       valueSeconds.textContent = String(Object.values(convertMsOb)[3]).padStart(2,'0');
-      if (!dataInter) {
-        clearInterval(timerId);
-      }
+      dataInter -= 1000;
     }, 1000);
 });
